@@ -1,0 +1,24 @@
+{
+    "name": "johnpaulmedina/healthcare",
+    "description": "Wrapper for HealthCare.gov API v3",
+    "type": "library",
+    "keywords": ["healthcare-finder-api","healthcare","laravel5"],
+    "authors": [
+        {
+            "name": "John Paul Medina",
+            "email": "medina.jpaul@gmail.com"
+        }
+    ],
+    "homepage":"https://github.com/johnpaulmedina/finder-api.git",
+    "license": "MIT",
+    "require": {
+        "php": ">=5.3.0",
+        "illuminate/support": "~5.0"
+    },
+    "autoload": {
+        "psr-0": {
+            "Healthcare": "src/"
+        }
+    },
+    "minimum-stability": "dev"
+}
