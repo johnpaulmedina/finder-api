@@ -149,10 +149,10 @@ class Healthcare {
         $request['PaginationInformation'] = ['PageNumber' => $pageNumber, 'PageSize' => $pageSize];
         $request['SortOrder'] = ['SortField' => 'BASE RATE', 'SortDirection' => 'ASC'];
 
-        $request['Filter'] = [];
+        // $request['Filter'] = [];
         // $request['Filter'][0] = ['MetalLevel'=>'Platinum'];
-        $request['Filter'][1] = ['MetalLevel'=>'Gold'];
-        $request['Filter'][2] = ['MetalLevel'=>'Silver'];
+        // $request['Filter'][1] = ['MetalLevel'=>'Gold'];
+        // $request['Filter'][2] = ['MetalLevel'=>'Silver'];
         // $request['Filter'][3] = ['MetalLevel'=>'Bronze'];
         // $request['Filter'][4] = ['BaseRateFilterRange'=>'$300-$400'];
         // $request['Issuers'] = ['IssuerIDType'=>'17341','IssuerIDType'=>'35783']; 
@@ -167,6 +167,12 @@ class Healthcare {
         $json = json_encode($xml,JSON_PRETTY_PRINT);
 
         $array = json_decode($json,TRUE);
+
+        $array['PlanDetails'] = [];
+
+        foreach($array['Plans']['Plan'] as $plan) {
+            $array['PlanDetails'][$plan['PlanID']] = [];
+        }
 
         // print_r($json);
         return $array;
