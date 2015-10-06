@@ -356,8 +356,8 @@ class Healthcare {
                 $subResource = [];
                 break;
             case 'PlanBenefitRequest':
-                $resource = ['PlansId','PlanId'];
-                $subResource = [''];
+                $resource = [];
+                $subResource = [];
                 break;
             default:
                 # code...
