@@ -355,7 +355,10 @@ class Healthcare {
                 $resource = ['ZipCode'];
                 $subResource = [];
                 break;
-            
+            case 'PlanBenefitRequest':
+                $resource = ['PlansId','PlanId'];
+                $subResource = [''];
+                break;
             default:
                 # code...
                 break;
@@ -375,8 +378,13 @@ class Healthcare {
                     $xml->startElementNS("api",$key, null); 
                 }
                 
-                if($key == "Enrollees" || $key == "Filter") {
-                    $flagElementName = $key;
+                if($key == "Enrollees" || $key == "Filter" || $key == "PlansIds") {
+                    if($key!=="PlansIds") {
+                        $flagElementName = $key;    
+                    } else {
+                        $flagElementName = "PlanId";
+                    }
+                    
                 }
                 foreach ($value as $key => $sub) {
                     if($flagElementName) {
