@@ -165,6 +165,7 @@ class Healthcare {
     	$plans = str_replace("ns2:", "", $plans);
     	$xml = simplexml_load_string($plans);
 		$json = json_encode($xml,JSON_PRETTY_PRINT);
+
 		$array = json_decode($json,TRUE);
 
     	// print_r($json);
