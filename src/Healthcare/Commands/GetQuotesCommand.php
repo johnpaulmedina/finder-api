@@ -41,7 +41,7 @@ class GetQuotesCommand extends Command {
     public function fire()
     {
         // $this->line('Testing initiation of '.\Healthcare::hostUrl().' php wrapper using zipcode: '.$this->argument('zipcode'));
-        \Healthcare::getQuote($this->argument('zipcode'),$this->argument('dob'),$this->argument('gender'),$this->argument('relation'),$this->argument('effectiveDate'));
+        \Healthcare::getQuote($this->argument('zipcode'),$this->argument('dob'),$this->argument('gender'),$this->argument('relation'),$this->argument('effectiveDate'),$this->argument('pageNumber'),$this->argument('pageSize'));
     }
 
     /**
@@ -57,6 +57,8 @@ class GetQuotesCommand extends Command {
             array('gender', InputArgument::REQUIRED, 'Enter a gender for applicant'),
             array('relation', InputArgument::REQUIRED, 'Enter a relation for applicant'),
             array('effectiveDate', InputArgument::REQUIRED, 'Enter a effective date for applicant'),
+            array('pageNumber', InputArgument::REQUIRED, 'Enter a page number'),
+            array('pageSize', InputArgument::REQUIRED, 'Enter a page size'),
         );
     }
 
