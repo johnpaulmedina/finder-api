@@ -171,8 +171,35 @@ class Healthcare {
         $array['PlanDetails'] = [];
 
         foreach($array['Plans']['Plan'] as $plan) {
-            $array['PlanDetails'][$plan['PlanID']] = [];
+            array_push($array['PlanDetails'], $plan['PlanID']);
+            // $array['PlanDetails'][$plan['PlanID']] = [];
         }
+
+        $planDetailRequst = [];
+        $planDetailRequst['Enrollees'] = [];
+        $planDetailRequst['Enrollees'][0] = [];
+        $planDetailRequst['Enrollees'][0]['DateOfBirth'] = $dob;
+        $planDetailRequst['Enrollees'][0]['Gender'] = $gender;
+        $planDetailRequst['Enrollees'][0]['Relation'] = $relation;
+        $planDetailRequst['Enrollees'][0]['InHouseholdIndicator'] = true;
+        $planDetailRequst['Location'] = [];
+        $planDetailRequst['Location']['ZipCode'] = $zipcode;
+        $planDetailRequst['Location']['County'] = [];
+        $planDetailRequst['Location']['County']['FipsCode'] = $availableCounties[$availableCounties['Counties'][0]]['FipsCode'];
+        $planDetailRequst['Location']['County']['CountyName'] = $availableCounties[$availableCounties['Counties'][0]]['CountyName'];
+        $planDetailRequst['Location']['County']['StateCode'] = $availableCounties[$availableCounties['Counties'][0]]['StateCode'];
+        $planDetailRequst['InsuranceEffectiveDate'] = $effectiveDate;
+
+        $planDetailRequst['Market'] = "Individual";
+
+        $planDetailRequst['PlanIds'] = $array['PlanDetails'];
+        $details = $this->buildXml('getIFPPlanBenefits','PlanBenefitRequest',$planDetailRequst)->makeRequest();
+        $details = str_replace("ns2:", "", $details);
+        $details = simplexml_load_string($details);
+        $details = json_encode($details,JSON_PRETTY_PRINT);
+
+        $details = json_decode($details,TRUE);
+        $array['details_response'] = $details;
 
         // print_r($json);
         return $array;
