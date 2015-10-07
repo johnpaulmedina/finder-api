@@ -222,7 +222,8 @@ class Healthcare {
         foreach($details['PlanBenefits']['PlanBenefit'] as $key => $detail) {
             // echo $key;
             // echo "<br>";
-            print_r($details['PlanBenefits']['PlanBenefit'][$key]['PlanID']);
+            echo $details['PlanBenefits']['PlanBenefit'][$key]['PlanID'];
+            // print_r();
             // $array['PlanDetailsById'][$details['PlanBenefits']['PlanBenefit'][$key]['PlanId']] = $details['PlanBenefits']['PlanBenefit'][$key];
         }
 
