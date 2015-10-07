@@ -170,9 +170,12 @@ class Healthcare {
 
         $array['PlanDetails'] = [];
 
+        $i=0;
         foreach($array['Plans']['Plan'] as $plan) {
-            array_push($array['PlanDetails'], $plan['PlanID']);
-            // $array['PlanDetails'][$plan['PlanID']] = [];
+            // array_push($array['PlanDetails'], $plan['PlanID']);
+            $array['PlanDetails'][$i] = [];
+            $array['PlanDetails'][$i]['PlanId'] = $plan['PlanID'];
+            $i++;
         }
 
         $planDetailRequst = [];
@@ -192,7 +195,18 @@ class Healthcare {
 
         $planDetailRequst['Market'] = "Individual";
 
+        // $planDetailRequst['PlanIds'] = [];
         $planDetailRequst['PlanIds'] = $array['PlanDetails'];
+
+        // print_r($planDetailRequst);
+
+        // foreach ( as $planId) {
+        //     array_push($planDetailRequst['PlanIds'], $planId);
+        // }
+
+        // print_r($planDetailRequst);
+        // die;
+
         $details = $this->buildXml('getIFPPlanBenefits','PlanBenefitRequest',$planDetailRequst)->makeRequest();
         $details = str_replace("ns2:", "", $details);
         $details = simplexml_load_string($details);
@@ -340,12 +354,14 @@ class Healthcare {
         $xml->endElement();
 
         $this->payload = $xml->outputMemory();  
-        return $this;
         // print_r($this->payload);
+        return $this;
+       
     }
 
 
     public function xmlrecursive($xml, $key, $value, $nameSpace, $useElementName = false) {
+        echo $key."\n";
         switch ($nameSpace) {
             case 'PlanQuoteRequest':
                 $resource = ['Enrollees','Location','InsuranceEffectiveDate','Market','IsFilterAnalysisRequiredIndicator'];
@@ -356,8 +372,8 @@ class Healthcare {
                 $subResource = [];
                 break;
             case 'PlanBenefitRequest':
-                $resource = [];
-                $subResource = [];
+                $resource = ['Enrollees','Location','InsuranceEffectiveDate','Market','IsFilterAnalysisRequiredIndicator','PlanIds','PlanId'];
+                $subResource = ['County'];
                 break;
             default:
                 # code...
@@ -378,8 +394,8 @@ class Healthcare {
                     $xml->startElementNS("api",$key, null); 
                 }
                 
-                if($key == "Enrollees" || $key == "Filter" || $key == "PlansIds") {
-                    if($key!=="PlansIds") {
+                if($key == "Enrollees" || $key == "Filter" || $key == "PlanIds") {
+                    if($key!=="PlanIds") {
                         $flagElementName = $key;    
                     } else {
                         $flagElementName = "PlanId";
