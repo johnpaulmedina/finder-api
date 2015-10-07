@@ -361,7 +361,6 @@ class Healthcare {
 
 
     public function xmlrecursive($xml, $key, $value, $nameSpace, $useElementName = false) {
-        echo $key."\n";
         switch ($nameSpace) {
             case 'PlanQuoteRequest':
                 $resource = ['Enrollees','Location','InsuranceEffectiveDate','Market','IsFilterAnalysisRequiredIndicator'];
