@@ -220,9 +220,9 @@ class Healthcare {
         $details = json_decode($details,TRUE);
 
         foreach($details['PlanBenefits']['PlanBenefit'] as $key => $detail) {
-            echo $key;
-            echo "<br>";
-            print_r($details['PlanBenefits']['PlanBenefit'][$key]);
+            // echo $key;
+            // echo "<br>";
+            print_r($details['PlanBenefits']['PlanBenefit'][$key]['PlanID']);
             // $array['PlanDetailsById'][$details['PlanBenefits']['PlanBenefit'][$key]['PlanId']] = $details['PlanBenefits']['PlanBenefit'][$key];
         }
 
