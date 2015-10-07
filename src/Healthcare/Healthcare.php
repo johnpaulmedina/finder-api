@@ -223,7 +223,7 @@ class Healthcare {
             echo $key;
             echo "<br>";
             print_r($details['PlanBenefits']['PlanBenefit'][$key]);
-            $array['PlanDetailsById'][$details['PlanBenefits']['PlanBenefit'][$key]['PlanId']] = $details['PlanBenefits']['PlanBenefit'][$key];
+            // $array['PlanDetailsById'][$details['PlanBenefits']['PlanBenefit'][$key]['PlanId']] = $details['PlanBenefits']['PlanBenefit'][$key];
         }
 
         $array['details_response'] = $details;
