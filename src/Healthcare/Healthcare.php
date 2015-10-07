@@ -169,6 +169,7 @@ class Healthcare {
         $array = json_decode($json,TRUE);
 
         $array['PlanDetails'] = [];
+        $array['PlanDetailsById'] = [];
 
         $i=0;
         foreach($array['Plans']['Plan'] as $plan) {
@@ -176,6 +177,10 @@ class Healthcare {
             $array['PlanDetails'][$i] = [];
             $array['PlanDetails'][$i]['PlanId'] = $plan['PlanID'];
             $i++;
+        }
+
+        foreach($array['Plans']['Plan'] as $plan) {
+            $array['PlanDetailsById'][$plan['PlanID']] = [];
         }
 
         $planDetailRequst = [];
@@ -213,6 +218,11 @@ class Healthcare {
         $details = json_encode($details,JSON_PRETTY_PRINT);
 
         $details = json_decode($details,TRUE);
+
+        foreach($details['PlanBenefits']['PlanBenefit'] as $key => $detail) {
+            $array['PlanDetailsById'][$details['PlanBenefits']['PlanBenefit'][$key]['PlanId']] = $details['PlanBenefits']['PlanBenefit'][$key];
+        }
+
         $array['details_response'] = $details;
 
         // print_r($json);
